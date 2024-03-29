@@ -2,8 +2,7 @@
 
 Generate UF2 firmware file from bin format.
 
-A partial function porting of uf2conv.py.
-[https://github.com/microsoft/uf2/blob/master/utils/uf2conv.py](https://github.com/microsoft/uf2/blob/master/utils/uf2conv.py)
+A partial function porting of [uf2conv.py](https://github.com/microsoft/uf2/blob/master/utils/uf2conv.py).
 
 Only support for converting bin to uf2.
 
@@ -11,12 +10,12 @@ Only support for converting bin to uf2.
 
 ### installation
 
-```
+```sh
 npm install -g uf2gen
 ```
 
 ### command example
-```
+```sh
 uf2gen firmware.bin --family SAMD21 --base 0x2000 -o output.hex
 ```
 
@@ -27,16 +26,17 @@ CLI arguments are similar to uf2conv.
 |flag|description|default
 |--|--|--|
 |-f, --family | MCU family | blank family |
-|-b, --base | Base address | 0x2000 |
-|-o, --output | Output file path | \<inputFilePath\>.uf2
+|-b, --base | base address | 0x2000 |
+|-o, --output | output file path | \<inputFilePath\>.uf2
 
-Families are specified in id (like 0x68ed2b88) or shortName (like SAMD21)
+Families are specified in id (like 0x68ed2b88) or shortName (like SAMD21). 
+
 Available MCU Families are listed here.  
-[./src/uf2families.ts](./src/uf2families.ts)
+[uf2families.ts](https://github.com/yahiro07/uf2gen/blob/main/src/uf2families.ts)
 
 ## Library usage
 
-```
+```ts
 import { getUf2FamilyId, convertBinToUf2 } from "uf2gen";
 
 const inputFilePath = "firmware.bin"
