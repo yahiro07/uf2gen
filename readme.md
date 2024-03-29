@@ -19,11 +19,6 @@ npm install -g uf2gen
 uf2gen firmware.bin --family SAMD21 --base 0x2000 -o output.hex
 ```
 
-### check version
-```sh
-uf2gen --version
-```
-
 ### arguments
 
 CLI arguments are similar to uf2conv.
@@ -38,6 +33,11 @@ Families are specified in id (like 0x68ed2b88) or shortName (like SAMD21).
 
 Available MCU Families are listed here.  
 [uf2families.ts](https://github.com/yahiro07/uf2gen/blob/main/src/uf2families.ts)
+
+### check version
+```sh
+uf2gen --version
+```
 
 ## Library usage
 
