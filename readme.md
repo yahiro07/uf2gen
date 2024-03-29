@@ -29,7 +29,7 @@ uf2gen --version
 CLI arguments are similar to uf2conv.
 
 |flag|description|default
-|--|--|--|
+|:--|:--|:--|
 |-f, --family | MCU family | blank family |
 |-b, --base | base address | 0x2000 |
 |-o, --output | output file path | \<inputFilePath\>.uf2
