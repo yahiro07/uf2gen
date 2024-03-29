@@ -58,7 +58,7 @@ async function processMain(args: {
 
 function mainEntry() {
   program
-    .version("0.0.1")
+    .version("0.1.0")
     .arguments("<inputFile>")
     .option("-b, --base <baseAddress>", "Base address (hex)", "0x2000")
     .option("-f, --family <family>", "Family")

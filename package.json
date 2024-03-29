@@ -1,6 +1,6 @@
 {
   "name": "uf2gen",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A tool to generate UF2 firmware file from bin format.",
   "author": "yahiro",
   "license": "MIT",
