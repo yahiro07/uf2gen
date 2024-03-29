@@ -19,6 +19,11 @@ npm install -g uf2gen
 uf2gen firmware.bin --family SAMD21 --base 0x2000 -o output.hex
 ```
 
+### check version
+```sh
+uf2gen --version
+```
+
 ### arguments
 
 CLI arguments are similar to uf2conv.

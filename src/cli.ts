@@ -43,7 +43,7 @@ async function processMain(args: {
       inputFilePath,
       baseAddress,
       familySpec,
-      familyIdText: familyId ? "0x" + familyId.toString(16) : "",
+      familyId: familyId ? "0x" + familyId.toString(16) : "",
       outputFilePath,
     });
   }
@@ -52,10 +52,13 @@ async function processMain(args: {
   const binFileBytes = new Uint8Array(buffer);
   const uf2FileBytes = convertBinToUf2(binFileBytes, baseAddress, familyId);
   await fs.writeFile(outputFilePath, uf2FileBytes);
+
+  console.log(`${outputFilePath} saved.`);
 }
 
 function mainEntry() {
   program
+    .version("0.0.1")
     .arguments("<inputFile>")
     .option("-b, --base <baseAddress>", "Base address (hex)", "0x2000")
     .option("-f, --family <family>", "Family")
