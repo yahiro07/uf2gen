@@ -22,6 +22,10 @@ export function replaceFilePathExtension(filePath: string, ext: string) {
   return filePath.split(".")[0] + ext;
 }
 
+export function numberToHexString(value: number) {
+  return "0x" + value.toString(16);
+}
+
 export function splitUint8ArrayIntoBlocks(
   bytes: Uint8Array,
   n: number

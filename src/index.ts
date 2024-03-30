@@ -2,6 +2,7 @@ import { uf2Families } from "./uf2families";
 import {
   concatenateUint8Arrays,
   parseIntCheckedZeroOrPositiveInteger,
+  raiseError,
   splitUint8ArrayIntoBlocks,
 } from "./utils";
 
@@ -39,4 +40,40 @@ export function convertBinToUf2(
     return block;
   });
   return concatenateUint8Arrays(convertedBlocks);
+}
+
+function readHexRecord(line: string) {
+  const bytesStr = line.slice(1);
+  const numBytes = bytesStr.length / 2;
+  const bytes = new Array(numBytes).fill(0).map((_, i) => {
+    const byteStr = bytesStr.slice(i * 2, i * 2 + 2);
+    return parseInt(byteStr, 16);
+  });
+  const length = bytes[0];
+  const offset = (bytes[1] << 8) | bytes[2];
+  const recordType = bytes[3];
+  const data = bytes.slice(4, 4 + length);
+  return { offset, recordType, data };
+}
+
+export function readHexBaseAddress(hexFileText: string): number {
+  const lines = hexFileText.split(/\r?\n/);
+  const line0 = readHexRecord(lines[0]);
+  const line1 = readHexRecord(lines[1]);
+  if (line0.recordType === 0x02 && line1.recordType === 0x00) {
+    const offset = ((line0.data[0] << 8) | line0.data[1]) << 4;
+    return offset | line1.offset;
+  } else if (line0.recordType === 0x00) {
+    return line0.offset;
+  } else {
+    raiseError(`unsupported hex file variation`);
+  }
+}
+
+export function convertHexToBin(hexFileText: string): Uint8Array {
+  const records = hexFileText.split(/\r?\n/).map(readHexRecord);
+  const bytes = records
+    .filter((it) => it.recordType === 0)
+    .flatMap((it) => it.data);
+  return new Uint8Array(bytes);
 }
